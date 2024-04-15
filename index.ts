@@ -67,7 +67,7 @@ expressApp.get("/test", (req, res) => {
 expressApp.get("/api/data", (req, res) => {
   res.send({ data: [1, 2, 3, 4, 5, 6, 7] });
 });
-expressApp.get("/data", (req, res) => {
+expressApp.get("/api/data-2", (req, res) => {
   res.send({ data: [1, 2, 3, 4, 5, 6, 7, 8] });
 });
 server.listen(port, () => {
