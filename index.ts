@@ -67,6 +67,9 @@ expressApp.get("/test", (req, res) => {
 expressApp.get("/api/data", (req, res) => {
   res.send({ data: [1, 2, 3, 4, 5, 6, 7] });
 });
+expressApp.get("/data", (req, res) => {
+  res.send({ data: [1, 2, 3, 4, 5, 6, 7, 8] });
+});
 server.listen(port, () => {
   // tslint:disable-next-line:no-console
   console.log("[server] started on port " + port);
