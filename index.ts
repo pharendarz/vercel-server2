@@ -44,9 +44,12 @@ expressApp.use((req, res, next) => {
   // Pass to next layer of middleware
   next();
 });
-
 expressApp.get("/", (req, res) => {
   console.log("[server] /", process.env.MONGODB_URI);
+
+  res.send({ app: "vercel-server-2-3" });
+});
+expressApp.get("/create", (req, res) => {
   const data = new DatabaseDefault(DataDefaultModel);
   data
     .create({ userId: "qwe123", name: "przemy", surname: "przemy" })
@@ -54,7 +57,7 @@ expressApp.get("/", (req, res) => {
       console.log("[create] result:", result);
     });
 
-  res.send({ app: "vercel-server-2-2" });
+  res.send({ app: "created" });
 });
 expressApp.get("/test", (req, res) => {
   const data = new DatabaseDefault(DataDefaultModel);
