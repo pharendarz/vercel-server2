@@ -55,8 +55,9 @@ expressApp.get("/test", (req, res) => {
     const data = new database_model_1.DatabaseDefault(data_model_1.DataDefaultModel);
     data.findAll().then((result) => {
         console.log("[db findAll] result:", result);
+        res.send({ app: "test fetch", data: result });
     });
-    res.send({ app: "test-vercel-server" });
+    // res.send({ app: "test-vercel-server" });
 });
 expressApp.get("/api/data", (req, res) => {
     res.send({ data: [1, 2, 3] });
