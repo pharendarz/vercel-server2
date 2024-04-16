@@ -42,26 +42,13 @@ expressApp.use((req, res, next) => {
   next();
 });
 
-// // # WEBSOCKETS
-// socketio.on("connection", (client: any) => {
-//   console.log("[websocket] connected");
-
-//   client.on("test event", (data: any) => {
-//     console.log("[websocket] event", data);
-//   });
-//   client.emit("test event", "[server-websocket] test event data");
-//   client.on("disconnect", () => {
-//     console.log("[websocket] disconnected");
-//   });
-// });
-
 expressApp.get("/", (req, res) => {
-  const data = new DatabaseDefault(DataDefaultModel);
-  data
-    .create({ userId: "123", name: "przemy", surname: "przemy" })
-    .then((result) => {
-      console.log("[create] result:", result);
-    });
+  // const data = new DatabaseDefault(DataDefaultModel);
+  // data
+  //   .create({ userId: "123", name: "przemy", surname: "przemy" })
+  //   .then((result) => {
+  //     console.log("[create] result:", result);
+  //   });
 
   res.send({ app: "vercel-server-2" });
 });
@@ -82,20 +69,20 @@ server.listen(port, () => {
 });
 
 // mongoose
-const dbUri = config.vercelDeploy
-  ? process.env.MONGODB_URI
-  : config.cloudDevDatabaseConnectionString;
-mongoose
-  .connect(dbUri, {
-    useNewUrlParser: true,
-    useUnifiedTopology: true,
-  })
-  .then(() => {
-    console.log("connected to database");
-  })
-  .catch((err) => {
-    console.log("error connecting to database", err);
-  });
+// const dbUri = config.vercelDeploy
+//   ? process.env.MONGODB_URI
+//   : config.cloudDevDatabaseConnectionString;
+// mongoose
+//   .connect(dbUri, {
+//     useNewUrlParser: true,
+//     useUnifiedTopology: true,
+//   })
+//   .then(() => {
+//     console.log("connected to database");
+//   })
+//   .catch((err) => {
+//     console.log("error connecting to database", err);
+//   });
 
 // "scripts": {
 //   "prebuild": "tslint -c tslint.json -p tsconfig.json --fix",
