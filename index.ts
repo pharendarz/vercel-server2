@@ -50,7 +50,7 @@ expressApp.get("/", (req, res) => {
   //     console.log("[create] result:", result);
   //   });
 
-  res.send({ app: "vercel-server-2" });
+  res.send({ app: "vercel-server-2-1" });
 });
 expressApp.get("/test", (req, res) => {
   // const io = req.app.get("socketio");
