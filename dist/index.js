@@ -40,12 +40,12 @@ expressApp.use((req, res, next) => {
 });
 expressApp.get("/", (req, res) => {
     console.log("[server] /", process.env.MONGODB_URI);
-    // const data = new DatabaseDefault(DataDefaultModel);
-    // data
-    //   .create({ userId: "qwe123", name: "przemy", surname: "przemy" })
-    //   .then((result) => {
-    //     console.log("[create] result:", result);
-    //   });
+    const data = new database_model_1.DatabaseDefault(data_model_1.DataDefaultModel);
+    data
+        .create({ userId: "qwe123", name: "przemy", surname: "przemy" })
+        .then((result) => {
+        console.log("[create] result:", result);
+    });
     res.send({ app: "vercel-server-2-2" });
 });
 expressApp.get("/test", (req, res) => {

@@ -29,11 +29,11 @@ class DatabaseDefault {
             });
         });
         this.findAll = (userId) => __awaiter(this, void 0, void 0, function* () {
-            const filter = { userId };
+            // const filter = { userId };
             console.log("[findAll] user:", userId);
             console.log("[findAll] model:", this.databaseModel);
             return new Promise((resolve, reject) => __awaiter(this, void 0, void 0, function* () {
-                yield this.databaseModel.find(filter, (err, records) => {
+                yield this.databaseModel.find((err, records) => {
                     if (err) {
                         reject(err);
                     }
