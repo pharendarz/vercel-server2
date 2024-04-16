@@ -5,6 +5,8 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 const express_1 = __importDefault(require("express"));
 const mongoose_1 = __importDefault(require("mongoose"));
+const database_model_1 = require("./database.model");
+const data_model_1 = require("./data.model");
 const http_1 = require("http");
 const dotenv_1 = __importDefault(require("dotenv"));
 // dotenv setup
@@ -47,8 +49,10 @@ expressApp.get("/", (req, res) => {
     res.send({ app: "vercel-server-2-2" });
 });
 expressApp.get("/test", (req, res) => {
-    // const io = req.app.get("socketio");
-    // io.emit("test event", "[server] test event data");
+    const data = new database_model_1.DatabaseDefault(data_model_1.DataDefaultModel);
+    data.findAll().then((result) => {
+        console.log("[db findAll] result:", result);
+    });
     res.send({ app: "test-vercel-server" });
 });
 expressApp.get("/api/data", (req, res) => {

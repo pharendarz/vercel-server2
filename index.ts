@@ -57,8 +57,10 @@ expressApp.get("/", (req, res) => {
   res.send({ app: "vercel-server-2-2" });
 });
 expressApp.get("/test", (req, res) => {
-  // const io = req.app.get("socketio");
-  // io.emit("test event", "[server] test event data");
+  const data = new DatabaseDefault(DataDefaultModel);
+  data.findAll().then((result) => {
+    console.log("[db findAll] result:", result);
+  });
   res.send({ app: "test-vercel-server" });
 });
 expressApp.get("/api/data", (req, res) => {

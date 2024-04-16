@@ -21,4 +21,17 @@ export class DatabaseDefault<T extends object> {
       );
     });
   };
+  public findAll = async (userId?: string) => {
+    const filter = { userId };
+    console.log("[findAll] user:", userId);
+    console.log("[findAll] model:", this.databaseModel);
+    return new Promise(async (resolve, reject) => {
+      await this.databaseModel.find(filter, (err, records) => {
+        if (err) {
+          reject(err);
+        }
+        resolve(records);
+      });
+    });
+  };
 }
