@@ -3,15 +3,10 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.config = void 0;
 const express_1 = __importDefault(require("express"));
+const mongoose_1 = __importDefault(require("mongoose"));
 const http_1 = require("http");
-// import { DatabaseDefault } from "./database.model";
-// import { DataDefaultModel } from "./data.model";
-// export const config = {
-//   vercelDeploy: false,
-//   cloudDevDatabaseConnectionString:
-//     "mongodb+srv://pharendarz:uJAbCuSkLaZ1xaty@vercel-cluster.xhsxwqj.mongodb.net/?retryWrites=true&w=majority&appName=vercel-cluster",
-// };
 const expressApp = (0, express_1.default)();
 const server = (0, http_1.createServer)(expressApp);
 const port = process.env.PORT || 4100;
@@ -19,6 +14,10 @@ expressApp.use((req, res, next) => {
     res.header("Access-Control-Allow-Headers", "x-access-token, Origin, Content-Type, Accept");
     next();
 });
+exports.config = {
+    vercelDeploy: false,
+    cloudDevDatabaseConnectionString: "mongodb+srv://pharendarz:uJAbCuSkLaZ1xaty@vercel-cluster.xhsxwqj.mongodb.net/?retryWrites=true&w=majority&appName=vercel-cluster",
+};
 expressApp.use((req, res, next) => {
     // Website you wish to allow to connect
     res.setHeader("Access-Control-Allow-Origin", "*"); // || 'port'
@@ -53,7 +52,7 @@ expressApp.get("/test", (req, res) => {
     res.send({ app: "test-vercel-server" });
 });
 expressApp.get("/api/data", (req, res) => {
-    res.send({ data: [1, 2, 3, 4, 5, 6] });
+    res.send({ data: [1, 2, 3] });
 });
 expressApp.get("/api/data-2", (req, res) => {
     res.send({ data: [1, 2, 3, 4, 5, 6, 7, 8] });
@@ -61,6 +60,11 @@ expressApp.get("/api/data-2", (req, res) => {
 server.listen(port, () => {
     // tslint:disable-next-line:no-console
     console.log("[server] started on port " + port);
+});
+// mongoose
+mongoose_1.default.connect(exports.config.cloudDevDatabaseConnectionString, {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
 });
 // "scripts": {
 //   "prebuild": "tslint -c tslint.json -p tsconfig.json --fix",

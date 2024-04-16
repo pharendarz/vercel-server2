@@ -3,14 +3,6 @@ import mongoose from "mongoose";
 import { DatabaseDefault } from "./database.model";
 import { DataDefaultModel } from "./data.model";
 import { createServer } from "http";
-// import { DatabaseDefault } from "./database.model";
-// import { DataDefaultModel } from "./data.model";
-
-// export const config = {
-//   vercelDeploy: false,
-//   cloudDevDatabaseConnectionString:
-//     "mongodb+srv://pharendarz:uJAbCuSkLaZ1xaty@vercel-cluster.xhsxwqj.mongodb.net/?retryWrites=true&w=majority&appName=vercel-cluster",
-// };
 
 const expressApp = express();
 const server = createServer(expressApp);
@@ -22,6 +14,12 @@ expressApp.use((req, res, next) => {
   );
   next();
 });
+
+export const config = {
+  vercelDeploy: false,
+  cloudDevDatabaseConnectionString:
+    "mongodb+srv://pharendarz:uJAbCuSkLaZ1xaty@vercel-cluster.xhsxwqj.mongodb.net/?retryWrites=true&w=majority&appName=vercel-cluster",
+};
 
 expressApp.use((req, res, next) => {
   // Website you wish to allow to connect
@@ -66,7 +64,7 @@ expressApp.get("/test", (req, res) => {
   res.send({ app: "test-vercel-server" });
 });
 expressApp.get("/api/data", (req, res) => {
-  res.send({ data: [1, 2, 3, 4, 5, 6] });
+  res.send({ data: [1, 2, 3] });
 });
 expressApp.get("/api/data-2", (req, res) => {
   res.send({ data: [1, 2, 3, 4, 5, 6, 7, 8] });
@@ -74,6 +72,12 @@ expressApp.get("/api/data-2", (req, res) => {
 server.listen(port, () => {
   // tslint:disable-next-line:no-console
   console.log("[server] started on port " + port);
+});
+
+// mongoose
+mongoose.connect(config.cloudDevDatabaseConnectionString, {
+  useNewUrlParser: true,
+  useUnifiedTopology: true,
 });
 
 // "scripts": {
