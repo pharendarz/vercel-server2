@@ -47,12 +47,12 @@ expressApp.use((req, res, next) => {
 
 expressApp.get("/", (req, res) => {
   console.log("[server] /", process.env.MONGODB_URI);
-  // const data = new DatabaseDefault(DataDefaultModel);
-  // data
-  //   .create({ userId: "qwe123", name: "przemy", surname: "przemy" })
-  //   .then((result) => {
-  //     console.log("[create] result:", result);
-  //   });
+  const data = new DatabaseDefault(DataDefaultModel);
+  data
+    .create({ userId: "qwe123", name: "przemy", surname: "przemy" })
+    .then((result) => {
+      console.log("[create] result:", result);
+    });
 
   res.send({ app: "vercel-server-2-1" });
 });
