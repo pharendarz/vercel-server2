@@ -1,6 +1,7 @@
 import express from "express";
 import mongoose from "mongoose";
-
+import { DatabaseDefault } from "./database.model";
+import { DataDefaultModel } from "./data.model";
 import { createServer } from "http";
 // import { DatabaseDefault } from "./database.model";
 // import { DataDefaultModel } from "./data.model";
