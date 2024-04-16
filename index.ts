@@ -16,7 +16,7 @@ expressApp.use((req, res, next) => {
 });
 
 export const config = {
-  vercelDeploy: false,
+  vercelDeploy: true,
   cloudDevDatabaseConnectionString:
     "mongodb+srv://pharendarz:uJAbCuSkLaZ1xaty@vercel-cluster.xhsxwqj.mongodb.net/?retryWrites=true&w=majority&appName=vercel-cluster",
 };
@@ -56,6 +56,13 @@ expressApp.use((req, res, next) => {
 // });
 
 expressApp.get("/", (req, res) => {
+  const data = new DatabaseDefault(DataDefaultModel);
+  data
+    .create({ userId: "123", name: "przemy", surname: "przemy" })
+    .then((result) => {
+      console.log("[create] result:", result);
+    });
+
   res.send({ app: "vercel-server-2" });
 });
 expressApp.get("/test", (req, res) => {
@@ -75,10 +82,20 @@ server.listen(port, () => {
 });
 
 // mongoose
-mongoose.connect(config.cloudDevDatabaseConnectionString, {
-  useNewUrlParser: true,
-  useUnifiedTopology: true,
-});
+const dbUri = config.vercelDeploy
+  ? process.env.MONGODB_URI
+  : config.cloudDevDatabaseConnectionString;
+mongoose
+  .connect(dbUri, {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+  })
+  .then(() => {
+    console.log("connected to database");
+  })
+  .catch((err) => {
+    console.log("error connecting to database", err);
+  });
 
 // "scripts": {
 //   "prebuild": "tslint -c tslint.json -p tsconfig.json --fix",

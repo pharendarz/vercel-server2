@@ -6,6 +6,8 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.config = void 0;
 const express_1 = __importDefault(require("express"));
 const mongoose_1 = __importDefault(require("mongoose"));
+const database_model_1 = require("./database.model");
+const data_model_1 = require("./data.model");
 const http_1 = require("http");
 const expressApp = (0, express_1.default)();
 const server = (0, http_1.createServer)(expressApp);
@@ -15,7 +17,7 @@ expressApp.use((req, res, next) => {
     next();
 });
 exports.config = {
-    vercelDeploy: false,
+    vercelDeploy: true,
     cloudDevDatabaseConnectionString: "mongodb+srv://pharendarz:uJAbCuSkLaZ1xaty@vercel-cluster.xhsxwqj.mongodb.net/?retryWrites=true&w=majority&appName=vercel-cluster",
 };
 expressApp.use((req, res, next) => {
@@ -44,6 +46,12 @@ expressApp.use((req, res, next) => {
 //   });
 // });
 expressApp.get("/", (req, res) => {
+    const data = new database_model_1.DatabaseDefault(data_model_1.DataDefaultModel);
+    data
+        .create({ userId: "123", name: "przemy", surname: "przemy" })
+        .then((result) => {
+        console.log("[create] result:", result);
+    });
     res.send({ app: "vercel-server-2" });
 });
 expressApp.get("/test", (req, res) => {
@@ -62,9 +70,19 @@ server.listen(port, () => {
     console.log("[server] started on port " + port);
 });
 // mongoose
-mongoose_1.default.connect(exports.config.cloudDevDatabaseConnectionString, {
+const dbUri = exports.config.vercelDeploy
+    ? process.env.MONGODB_URI
+    : exports.config.cloudDevDatabaseConnectionString;
+mongoose_1.default
+    .connect(dbUri, {
     useNewUrlParser: true,
     useUnifiedTopology: true,
+})
+    .then(() => {
+    console.log("connected to database");
+})
+    .catch((err) => {
+    console.log("error connecting to database", err);
 });
 // "scripts": {
 //   "prebuild": "tslint -c tslint.json -p tsconfig.json --fix",
