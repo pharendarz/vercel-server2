@@ -57,7 +57,7 @@ expressApp.use((req, res, next) => {
 // });
 
 expressApp.get("/", (req, res) => {
-  res.send({ app: "vercel-server" });
+  res.send({ app: "vercel-server-2" });
 });
 expressApp.get("/test", (req, res) => {
   // const io = req.app.get("socketio");
@@ -65,7 +65,7 @@ expressApp.get("/test", (req, res) => {
   res.send({ app: "test-vercel-server" });
 });
 expressApp.get("/api/data", (req, res) => {
-  res.send({ data: [1, 2, 3, 4, 5, 6, 7] });
+  res.send({ data: [1, 2, 3, 4, 5, 6] });
 });
 expressApp.get("/api/data-2", (req, res) => {
   res.send({ data: [1, 2, 3, 4, 5, 6, 7, 8] });
