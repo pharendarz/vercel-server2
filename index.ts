@@ -76,14 +76,14 @@ server.listen(port, () => {
 // const dbUri = config.vercelDeploy
 //   ? process.env.MONGODB_URI
 //   : config.cloudDevDatabaseConnectionString;
-// mongoose
-//   .connect(process.env.MONGODB_URI, {
-//     useNewUrlParser: true,
-//     useUnifiedTopology: true,
-//   })
-//   .then(() => {
-//     console.log("connected to database");
-//   })
-//   .catch((err) => {
-//     console.log("error connecting to database", err);
-//   });
+mongoose
+  .connect(process.env.MONGODB_URI, {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+  })
+  .then(() => {
+    console.log("connected to database");
+  })
+  .catch((err) => {
+    console.log("error connecting to database", err);
+  });

@@ -4,6 +4,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const express_1 = __importDefault(require("express"));
+const mongoose_1 = __importDefault(require("mongoose"));
 const http_1 = require("http");
 const dotenv_1 = __importDefault(require("dotenv"));
 // dotenv setup
@@ -64,15 +65,15 @@ server.listen(port, () => {
 // const dbUri = config.vercelDeploy
 //   ? process.env.MONGODB_URI
 //   : config.cloudDevDatabaseConnectionString;
-// mongoose
-//   .connect(process.env.MONGODB_URI, {
-//     useNewUrlParser: true,
-//     useUnifiedTopology: true,
-//   })
-//   .then(() => {
-//     console.log("connected to database");
-//   })
-//   .catch((err) => {
-//     console.log("error connecting to database", err);
-//   });
+mongoose_1.default
+    .connect(process.env.MONGODB_URI, {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+})
+    .then(() => {
+    console.log("connected to database");
+})
+    .catch((err) => {
+    console.log("error connecting to database", err);
+});
 //# sourceMappingURL=index.js.map
