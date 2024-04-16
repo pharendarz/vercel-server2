@@ -16,7 +16,7 @@ expressApp.use((req, res, next) => {
 });
 
 export const config = {
-  vercelDeploy: true,
+  vercelDeploy: false,
   cloudDevDatabaseConnectionString:
     "mongodb+srv://pharendarz:uJAbCuSkLaZ1xaty@vercel-cluster.xhsxwqj.mongodb.net/?retryWrites=true&w=majority&appName=vercel-cluster",
 };
