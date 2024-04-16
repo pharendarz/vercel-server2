@@ -4,8 +4,6 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const express_1 = __importDefault(require("express"));
-const database_model_1 = require("./database.model");
-const data_model_1 = require("./data.model");
 const http_1 = require("http");
 const expressApp = (0, express_1.default)();
 const server = (0, http_1.createServer)(expressApp);
@@ -34,12 +32,12 @@ expressApp.use((req, res, next) => {
     next();
 });
 expressApp.get("/", (req, res) => {
-    const data = new database_model_1.DatabaseDefault(data_model_1.DataDefaultModel);
-    data
-        .create({ userId: "qwe123", name: "przemy", surname: "przemy" })
-        .then((result) => {
-        console.log("[create] result:", result);
-    });
+    // const data = new DatabaseDefault(DataDefaultModel);
+    // data
+    //   .create({ userId: "qwe123", name: "przemy", surname: "przemy" })
+    //   .then((result) => {
+    //     console.log("[create] result:", result);
+    //   });
     res.send({ app: "vercel-server-2" });
 });
 expressApp.get("/test", (req, res) => {
