@@ -70,14 +70,4 @@ server.listen(port, () => {
 //   .catch((err) => {
 //     console.log("error connecting to database", err);
 //   });
-// "scripts": {
-//   "prebuild": "tslint -c tslint.json -p tsconfig.json --fix",
-//   "build": "tsc",
-//   "prestart": "npm run build",
-//   "start1": "node .",
-//   "start": "node --inspect=5858 -r ts-node/register ./api/index.ts",
-//   "server": "nodemon ./api/index.js",
-//   "start:watch": "nodemon",
-//   "test": "echo \"Error: no test specified\" && exit 1"
-// },
 //# sourceMappingURL=index.js.map
