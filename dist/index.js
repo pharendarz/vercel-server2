@@ -37,7 +37,7 @@ expressApp.use((req, res, next) => {
     next();
 });
 expressApp.get("/", (req, res) => {
-    // console.log("[server] /", process.env.MONGODB_URI);
+    console.log("[server] /", process.env.MONGODB_URI);
     // const data = new DatabaseDefault(DataDefaultModel);
     // data
     //   .create({ userId: "qwe123", name: "przemy", surname: "przemy" })
