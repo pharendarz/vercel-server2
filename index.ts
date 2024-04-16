@@ -3,7 +3,10 @@ import mongoose from "mongoose";
 import { DatabaseDefault } from "./database.model";
 import { DataDefaultModel } from "./data.model";
 import { createServer } from "http";
-
+import dotenv from "dotenv";
+// dotenv setup
+dotenv.config();
+// express setup
 const expressApp = express();
 const server = createServer(expressApp);
 const port = process.env.PORT || 4100;
@@ -43,6 +46,7 @@ expressApp.use((req, res, next) => {
 });
 
 expressApp.get("/", (req, res) => {
+  console.log("[server] /", process.env.MONGODB_URI);
   // const data = new DatabaseDefault(DataDefaultModel);
   // data
   //   .create({ userId: "qwe123", name: "przemy", surname: "przemy" })
@@ -72,14 +76,14 @@ server.listen(port, () => {
 // const dbUri = config.vercelDeploy
 //   ? process.env.MONGODB_URI
 //   : config.cloudDevDatabaseConnectionString;
-// mongoose
-//   .connect(dbUri, {
-//     useNewUrlParser: true,
-//     useUnifiedTopology: true,
-//   })
-//   .then(() => {
-//     console.log("connected to database");
-//   })
-//   .catch((err) => {
-//     console.log("error connecting to database", err);
-//   });
+mongoose
+  .connect(process.env.MONGODB_URI, {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+  })
+  .then(() => {
+    console.log("connected to database");
+  })
+  .catch((err) => {
+    console.log("error connecting to database", err);
+  });

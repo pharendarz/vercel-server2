@@ -4,7 +4,12 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const express_1 = __importDefault(require("express"));
+const mongoose_1 = __importDefault(require("mongoose"));
 const http_1 = require("http");
+const dotenv_1 = __importDefault(require("dotenv"));
+// dotenv setup
+dotenv_1.default.config();
+// express setup
 const expressApp = (0, express_1.default)();
 const server = (0, http_1.createServer)(expressApp);
 const port = process.env.PORT || 4100;
@@ -32,6 +37,7 @@ expressApp.use((req, res, next) => {
     next();
 });
 expressApp.get("/", (req, res) => {
+    console.log("[server] /", process.env.MONGODB_URI);
     // const data = new DatabaseDefault(DataDefaultModel);
     // data
     //   .create({ userId: "qwe123", name: "przemy", surname: "przemy" })
@@ -59,15 +65,15 @@ server.listen(port, () => {
 // const dbUri = config.vercelDeploy
 //   ? process.env.MONGODB_URI
 //   : config.cloudDevDatabaseConnectionString;
-// mongoose
-//   .connect(dbUri, {
-//     useNewUrlParser: true,
-//     useUnifiedTopology: true,
-//   })
-//   .then(() => {
-//     console.log("connected to database");
-//   })
-//   .catch((err) => {
-//     console.log("error connecting to database", err);
-//   });
+mongoose_1.default
+    .connect(process.env.MONGODB_URI, {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+})
+    .then(() => {
+    console.log("connected to database");
+})
+    .catch((err) => {
+    console.log("error connecting to database", err);
+});
 //# sourceMappingURL=index.js.map
