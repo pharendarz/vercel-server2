@@ -15,11 +15,11 @@ expressApp.use((req, res, next) => {
   next();
 });
 
-// export const config = {
-//   vercelDeploy: false,
-//   cloudDevDatabaseConnectionString:
-//     "mongodb+srv://pharendarz:uJAbCuSkLaZ1xaty@vercel-cluster.xhsxwqj.mongodb.net/?retryWrites=true&w=majority&appName=vercel-cluster",
-// };
+export const config = {
+  vercelDeploy: true,
+  cloudDevDatabaseConnectionString:
+    "mongodb+srv://pharendarz:uJAbCuSkLaZ1xaty@vercel-cluster.xhsxwqj.mongodb.net/?retryWrites=true&w=majority&appName=vercel-cluster",
+};
 
 expressApp.use((req, res, next) => {
   // Website you wish to allow to connect
@@ -69,17 +69,17 @@ server.listen(port, () => {
 });
 
 // mongoose
-// const dbUri = config.vercelDeploy
-//   ? process.env.MONGODB_URI
-//   : config.cloudDevDatabaseConnectionString;
-// mongoose
-//   .connect(dbUri, {
-//     useNewUrlParser: true,
-//     useUnifiedTopology: true,
-//   })
-//   .then(() => {
-//     console.log("connected to database");
-//   })
-//   .catch((err) => {
-//     console.log("error connecting to database", err);
-//   });
+const dbUri = config.vercelDeploy
+  ? process.env.MONGODB_URI
+  : config.cloudDevDatabaseConnectionString;
+mongoose
+  .connect(dbUri, {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+  })
+  .then(() => {
+    console.log("connected to database");
+  })
+  .catch((err) => {
+    console.log("error connecting to database", err);
+  });
