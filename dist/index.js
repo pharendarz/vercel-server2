@@ -3,7 +3,6 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.config = void 0;
 const express_1 = __importDefault(require("express"));
 const http_1 = require("http");
 const expressApp = (0, express_1.default)();
@@ -13,10 +12,11 @@ expressApp.use((req, res, next) => {
     res.header("Access-Control-Allow-Headers", "x-access-token, Origin, Content-Type, Accept");
     next();
 });
-exports.config = {
-    vercelDeploy: false,
-    cloudDevDatabaseConnectionString: "mongodb+srv://pharendarz:uJAbCuSkLaZ1xaty@vercel-cluster.xhsxwqj.mongodb.net/?retryWrites=true&w=majority&appName=vercel-cluster",
-};
+// export const config = {
+//   vercelDeploy: false,
+//   cloudDevDatabaseConnectionString:
+//     "mongodb+srv://pharendarz:uJAbCuSkLaZ1xaty@vercel-cluster.xhsxwqj.mongodb.net/?retryWrites=true&w=majority&appName=vercel-cluster",
+// };
 expressApp.use((req, res, next) => {
     // Website you wish to allow to connect
     res.setHeader("Access-Control-Allow-Origin", "*"); // || 'port'

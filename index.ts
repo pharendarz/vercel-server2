@@ -15,11 +15,11 @@ expressApp.use((req, res, next) => {
   next();
 });
 
-export const config = {
-  vercelDeploy: false,
-  cloudDevDatabaseConnectionString:
-    "mongodb+srv://pharendarz:uJAbCuSkLaZ1xaty@vercel-cluster.xhsxwqj.mongodb.net/?retryWrites=true&w=majority&appName=vercel-cluster",
-};
+// export const config = {
+//   vercelDeploy: false,
+//   cloudDevDatabaseConnectionString:
+//     "mongodb+srv://pharendarz:uJAbCuSkLaZ1xaty@vercel-cluster.xhsxwqj.mongodb.net/?retryWrites=true&w=majority&appName=vercel-cluster",
+// };
 
 expressApp.use((req, res, next) => {
   // Website you wish to allow to connect
