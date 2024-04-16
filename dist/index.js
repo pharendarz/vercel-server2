@@ -4,9 +4,6 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const express_1 = __importDefault(require("express"));
-const mongoose_1 = __importDefault(require("mongoose"));
-const database_model_1 = require("./database.model");
-const data_model_1 = require("./data.model");
 const http_1 = require("http");
 const dotenv_1 = __importDefault(require("dotenv"));
 // dotenv setup
@@ -39,14 +36,14 @@ expressApp.use((req, res, next) => {
     next();
 });
 expressApp.get("/", (req, res) => {
-    console.log("[server] /", process.env.MONGODB_URI);
-    const data = new database_model_1.DatabaseDefault(data_model_1.DataDefaultModel);
-    data
-        .create({ userId: "qwe123", name: "przemy", surname: "przemy" })
-        .then((result) => {
-        console.log("[create] result:", result);
-    });
-    res.send({ app: "vercel-server-2-1" });
+    // console.log("[server] /", process.env.MONGODB_URI);
+    // const data = new DatabaseDefault(DataDefaultModel);
+    // data
+    //   .create({ userId: "qwe123", name: "przemy", surname: "przemy" })
+    //   .then((result) => {
+    //     console.log("[create] result:", result);
+    //   });
+    res.send({ app: "vercel-server-2-2" });
 });
 expressApp.get("/test", (req, res) => {
     // const io = req.app.get("socketio");
@@ -67,15 +64,15 @@ server.listen(port, () => {
 // const dbUri = config.vercelDeploy
 //   ? process.env.MONGODB_URI
 //   : config.cloudDevDatabaseConnectionString;
-mongoose_1.default
-    .connect(process.env.MONGODB_URI, {
-    useNewUrlParser: true,
-    useUnifiedTopology: true,
-})
-    .then(() => {
-    console.log("connected to database");
-})
-    .catch((err) => {
-    console.log("error connecting to database", err);
-});
+// mongoose
+//   .connect(process.env.MONGODB_URI, {
+//     useNewUrlParser: true,
+//     useUnifiedTopology: true,
+//   })
+//   .then(() => {
+//     console.log("connected to database");
+//   })
+//   .catch((err) => {
+//     console.log("error connecting to database", err);
+//   });
 //# sourceMappingURL=index.js.map

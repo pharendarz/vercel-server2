@@ -46,15 +46,15 @@ expressApp.use((req, res, next) => {
 });
 
 expressApp.get("/", (req, res) => {
-  console.log("[server] /", process.env.MONGODB_URI);
-  const data = new DatabaseDefault(DataDefaultModel);
-  data
-    .create({ userId: "qwe123", name: "przemy", surname: "przemy" })
-    .then((result) => {
-      console.log("[create] result:", result);
-    });
+  // console.log("[server] /", process.env.MONGODB_URI);
+  // const data = new DatabaseDefault(DataDefaultModel);
+  // data
+  //   .create({ userId: "qwe123", name: "przemy", surname: "przemy" })
+  //   .then((result) => {
+  //     console.log("[create] result:", result);
+  //   });
 
-  res.send({ app: "vercel-server-2-1" });
+  res.send({ app: "vercel-server-2-2" });
 });
 expressApp.get("/test", (req, res) => {
   // const io = req.app.get("socketio");
@@ -76,14 +76,14 @@ server.listen(port, () => {
 // const dbUri = config.vercelDeploy
 //   ? process.env.MONGODB_URI
 //   : config.cloudDevDatabaseConnectionString;
-mongoose
-  .connect(process.env.MONGODB_URI, {
-    useNewUrlParser: true,
-    useUnifiedTopology: true,
-  })
-  .then(() => {
-    console.log("connected to database");
-  })
-  .catch((err) => {
-    console.log("error connecting to database", err);
-  });
+// mongoose
+//   .connect(process.env.MONGODB_URI, {
+//     useNewUrlParser: true,
+//     useUnifiedTopology: true,
+//   })
+//   .then(() => {
+//     console.log("connected to database");
+//   })
+//   .catch((err) => {
+//     console.log("error connecting to database", err);
+//   });
