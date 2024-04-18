@@ -4,14 +4,14 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const express_1 = __importDefault(require("express"));
+const mongoose_1 = __importDefault(require("mongoose"));
+const database_model_1 = require("./database.model");
+const data_model_1 = require("./data.model");
 const http_1 = require("http");
-// import { DatabaseDefault } from "./database.model";
-// import { DataDefaultModel } from "./data.model";
-// export const config = {
-//   vercelDeploy: false,
-//   cloudDevDatabaseConnectionString:
-//     "mongodb+srv://pharendarz:uJAbCuSkLaZ1xaty@vercel-cluster.xhsxwqj.mongodb.net/?retryWrites=true&w=majority&appName=vercel-cluster",
-// };
+const dotenv_1 = __importDefault(require("dotenv"));
+// dotenv setup
+dotenv_1.default.config();
+// express setup
 const expressApp = (0, express_1.default)();
 const server = (0, http_1.createServer)(expressApp);
 const port = process.env.PORT || 4100;
@@ -19,6 +19,11 @@ expressApp.use((req, res, next) => {
     res.header("Access-Control-Allow-Headers", "x-access-token, Origin, Content-Type, Accept");
     next();
 });
+// export const config = {
+//   vercelDeploy: true,
+//   cloudDevDatabaseConnectionString:
+//     "mongodb+srv://pharendarz:uJAbCuSkLaZ1xaty@vercel-cluster.xhsxwqj.mongodb.net/?retryWrites=true&w=majority&appName=vercel-cluster",
+// };
 expressApp.use((req, res, next) => {
     // Website you wish to allow to connect
     res.setHeader("Access-Control-Allow-Origin", "*"); // || 'port'
@@ -33,27 +38,29 @@ expressApp.use((req, res, next) => {
     // Pass to next layer of middleware
     next();
 });
-// // # WEBSOCKETS
-// socketio.on("connection", (client: any) => {
-//   console.log("[websocket] connected");
-//   client.on("test event", (data: any) => {
-//     console.log("[websocket] event", data);
-//   });
-//   client.emit("test event", "[server-websocket] test event data");
-//   client.on("disconnect", () => {
-//     console.log("[websocket] disconnected");
-//   });
-// });
 expressApp.get("/", (req, res) => {
-    res.send({ app: "vercel-server-2" });
+    console.log("[server] /", process.env.MONGODB_URI);
+    res.send({ app: "vercel-server-2-3" });
+});
+expressApp.get("/create", (req, res) => {
+    const data = new database_model_1.DatabaseDefault(data_model_1.DataDefaultModel);
+    data
+        .create({ userId: "qwe123", name: "przemy", surname: "przemy" })
+        .then((result) => {
+        console.log("[create] result:", result);
+    });
+    res.send({ app: "created" });
 });
 expressApp.get("/test", (req, res) => {
-    // const io = req.app.get("socketio");
-    // io.emit("test event", "[server] test event data");
-    res.send({ app: "test-vercel-server" });
+    const data = new database_model_1.DatabaseDefault(data_model_1.DataDefaultModel);
+    data.findAll().then((result) => {
+        console.log("[db findAll] result:", result);
+        res.send({ app: "test fetch", data: result });
+    });
+    // res.send({ app: "test-vercel-server" });
 });
 expressApp.get("/api/data", (req, res) => {
-    res.send({ data: [1, 2, 3, 4, 5, 6] });
+    res.send({ data: [1, 2, 3] });
 });
 expressApp.get("/api/data-2", (req, res) => {
     res.send({ data: [1, 2, 3, 4, 5, 6, 7, 8] });
@@ -62,14 +69,19 @@ server.listen(port, () => {
     // tslint:disable-next-line:no-console
     console.log("[server] started on port " + port);
 });
-// "scripts": {
-//   "prebuild": "tslint -c tslint.json -p tsconfig.json --fix",
-//   "build": "tsc",
-//   "prestart": "npm run build",
-//   "start1": "node .",
-//   "start": "node --inspect=5858 -r ts-node/register ./api/index.ts",
-//   "server": "nodemon ./api/index.js",
-//   "start:watch": "nodemon",
-//   "test": "echo \"Error: no test specified\" && exit 1"
-// },
+// mongoose
+// const dbUri = config.vercelDeploy
+//   ? process.env.MONGODB_URI
+//   : config.cloudDevDatabaseConnectionString;
+mongoose_1.default
+    .connect(process.env.MONGODB_URI, {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+})
+    .then(() => {
+    console.log("connected to database");
+})
+    .catch((err) => {
+    console.log("error connecting to database", err);
+});
 //# sourceMappingURL=index.js.map
